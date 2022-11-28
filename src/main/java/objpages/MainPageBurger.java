@@ -24,7 +24,7 @@ public class MainPageBurger {
                 checkStuffingDisplayed = By.xpath("/html/body/div[1]/div/main/section[1]/div[2]/h2[3]"),
                 ingredientBunsLink = By.xpath("/html/body/div[1]/div/main/section[1]/div[1]/div[1]/span"),
                 checkBunsDisplayed = By.xpath("/html/body/div[1]/div/main/section[1]/div[2]/h2[1]"),
-                orderButton = By.xpath("//*[contains(text(), 'Оформить заказ')]");
+                orderButton = By.xpath("/html/body/div[1]/div/main/section[2]/div/button");
 
 
 
@@ -41,7 +41,7 @@ public class MainPageBurger {
         }
 
         // 	вход по кнопке «Войти в аккаунт» на главной
-        public void findCheckAndClickAuthorizationButton(By authorizationButton ) {
+        public void findCheckAndClickAuthorizationButton() {
             new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(authorizationButton));
             Object elementAuthorizationButton = driver.findElement(authorizationButton);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", elementAuthorizationButton);
@@ -50,19 +50,15 @@ public class MainPageBurger {
         }
 
             // 	вход в личный кабинет
-        public void findAndClickPersonalAccountElement(By personalAccountElement) {
+        public void findAndClickPersonalAccountElement() {
             new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(personalAccountElement));
             driver.findElement(personalAccountElement).click();
         }
 
         // загрузка стартовой страницы после авторизации и наличие кнопки "Оформить заказ"
-        public boolean findOrderButton () {
+        public String findOrderButton () {
             new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(orderButton));
-            try {
-                return driver.findElement(orderButton).isDisplayed();
-            } catch (NoSuchElementException e) {
-                return false;
-            }
+            return driver.findElement(orderButton).getText();
         }
 
           // метод того что при нажатии ссылки соусов меню автоматически скролится до соусов

@@ -5,55 +5,47 @@ import objpages.MainPageBurger;
 import objpages.RegistrationPage;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.time.Duration;
-
+import java.util.Random;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class)
+
+
 public class RegistrationTest {
     WebDriver driver = new ChromeDriver();
 
-    final String login;
-    final String email;
-    final String password;
 
-    public RegistrationTest(String login, String email, String password) {
-        this.login = login;
-        this.email = email;
-        this.password = password;
-    }
-
-    @Parameterized.Parameters
-    public static Object[][] getData() {
-        return new Object[][]{
-                {"ivanov", "ivanov@ya.ru", "123456"},
-                {"Петров", "petrov@ya.ru", "Петров"},
-        };
-    }
-
-    @Test
+          @Test
     public void checkRegistrationTest() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.open();
         objAuthorizationPage.clickRegistrationLink();
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
-        objRegistrationPage.userNameRegistration(login);
-        objRegistrationPage.userEmailRegistration(email);
-        objRegistrationPage.userPasswordRegistration(password);
-        objRegistrationPage.clickRegistrationButton();
-        objAuthorizationPage.userEmail(email);
-        objAuthorizationPage.userPassword(password);
-        objAuthorizationPage.clickLoginButton();
-        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        objMainPageBurger.findOrderButton();
+           final String login = "something" + new Random().nextInt(10000);
+         final String email = "something" + new Random().nextInt(10000) + "@yandex.ru";
+           final String password = "something" + new Random().nextInt(10000);
+        objRegistrationPage.createNewUser(login,email,password);
+        objAuthorizationPage.authorization(email,password);
+              MainPageBurger objMainPageBurger = new MainPageBurger(driver);
         assertEquals("RegistrationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+    }
+
+    @Test
+    public void checkErrorMassageTest() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
+        objAuthorizationPage.open();
+        objAuthorizationPage.clickRegistrationLink();
+        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        final String login = "something" + new Random().nextInt(10000);
+        final String email = "something" + new Random().nextInt(10000) + "@yandex.ru";
+        final String password =  "12345";
+        objRegistrationPage.createNewUser(login, email, password);
+        objRegistrationPage.findErrorMessage();
+        assertEquals("RegistrationFaild", "Некорректный пароль", objRegistrationPage.checkErrorMessage());
     }
 
     @After

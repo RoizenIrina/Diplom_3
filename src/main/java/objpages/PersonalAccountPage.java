@@ -13,7 +13,7 @@ public class PersonalAccountPage {
     private final static String personalAccountPage = "https://stellarburgers.nomoreparties.site/";
     private final By
             exitButton = By.xpath("/html/body/div[1]/div/main/div/nav/ul/li[3]/button"),
-            logoButton = By.xpath("/html/body/div[1]/div/header/nav/div/a/svg"),
+            logoButton = By.xpath("/html/body/div[1]/div/header/nav/div/a"),
             constructorButton = By.xpath("/html/body/div[1]/div/header/nav/ul/li[1]/a/p");
 
     public PersonalAccountPage(WebDriver driver) {
@@ -21,19 +21,19 @@ public class PersonalAccountPage {
     }
 
     //	выход из аккаунта через кнопку 'выход' в личном кабинете
-    public void clickExitButton(By exitButton) {
+    public void clickExitButton() {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(exitButton));
         driver.findElement(exitButton).click();
     }
 
     //	переход на главную страницу через символ логотипа в личном кабинете
-    public void clickLogoButton(By logoButton) {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(logoButton));
+    public void clickLogoButton() {
+//        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(logoButton));
         driver.findElement(logoButton).click();
     }
 
     //	переход в раздел конструктор на главной странице через ссылку в личном кабинете
-    public void clickConstructorButton(By constructorButton) {
+    public void clickConstructorButton() {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(constructorButton));
         driver.findElement(constructorButton).click();
     }

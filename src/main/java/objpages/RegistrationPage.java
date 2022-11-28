@@ -1,7 +1,5 @@
 package objpages;
 
-import org.example.Client;
-import org.example.Generator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -28,32 +26,30 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-   //завели логин
-    public void userNameRegistration(String login)
-    {        driver.findElement(userNameRegistration).sendKeys(login);
+    public void open (){
+        driver.get(registrationPage);
     }
-// завели почту
-    public void userEmailRegistration(String email){
+    public void createNewUser(String login, String email, String password){
+        driver.findElement(userNameRegistration).clear();
+        driver.findElement(userNameRegistration).sendKeys(login);
+        driver.findElement(userEmailRegistration).clear();
         driver.findElement(userEmailRegistration).sendKeys(email);
-    }
-// завели пароль
-    public void userPasswordRegistration(String password){
+        driver.findElement(userPasswordRegistration).clear();
         driver.findElement(userPasswordRegistration).sendKeys(password);
-    }
-// кликнули Зарегистрироваться
-    public void clickRegistrationButton (){
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(registrationButton));
         driver.findElement(registrationButton).click();
+       // new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+
     //	вход через кнопку в форме регистрации
-    public void clickAuthorizationLinkByRegistrationForm (By authorizationLinkByRegistrationForm){
+    public void clickAuthorizationLinkByRegistrationForm (){
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(authorizationLinkByRegistrationForm));
         driver.findElement(authorizationLinkByRegistrationForm).click();
     }
 
     // наличие сообщения об ошибке пароля
-    public boolean findErrorMessage (By errorMessage ) {
+    public boolean findErrorMessage () {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
         try {
             return driver.findElement(errorMessage).isDisplayed();
@@ -62,7 +58,7 @@ public class RegistrationPage {
         }
     }
 // текст ошибки
-    public String checkErrorMessage (By errorMessage ) {
+    public String checkErrorMessage () {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
         return driver.findElement(errorMessage).getText();
 
