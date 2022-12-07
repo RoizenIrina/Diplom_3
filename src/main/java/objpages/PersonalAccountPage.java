@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class PersonalAccountPage {
@@ -21,8 +22,7 @@ public class PersonalAccountPage {
     }
 
     @Step("open personal Account Page")
-    public void open (){
-        driver.get(personalAccountPage);
+    public void open() {
     }
 
     //	выход из аккаунта через кнопку 'выход' в личном кабинете
@@ -35,7 +35,7 @@ public class PersonalAccountPage {
     //	переход на главную страницу через символ логотипа в личном кабинете
     @Step("Find And Click logo on personal account")
     public void clickLogoButton() {
-      new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(logoButton));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(logoButton));
         driver.findElement(logoButton).click();
     }
 
@@ -45,8 +45,9 @@ public class PersonalAccountPage {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(constructorButton));
         driver.findElement(constructorButton).click();
     }
+
     @Step("Find And get text from exit Button on personal account")
-    public String checkLogInPersonalAccount () {
+    public String checkLogInPersonalAccount() {
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(exitButton));
         return driver.findElement(exitButton).getText();
     }

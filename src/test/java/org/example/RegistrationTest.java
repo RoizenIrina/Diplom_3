@@ -1,23 +1,25 @@
 package org.example;
 
+import another.YandexOptions;
 import io.qameta.allure.junit4.DisplayName;
 import objpages.AuthorizationPage;
 import objpages.MainPageBurger;
 import objpages.RegistrationPage;
-import org.Generator;
+import another.Generator;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class RegistrationTest {
-    WebDriver driver = new ChromeDriver();
+
+    //WebDriver driver = new ChromeDriver();//когда нужно в Хроме тестировать
+    WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// когда нужно в Яндексе тестировать
 
 
     @Test

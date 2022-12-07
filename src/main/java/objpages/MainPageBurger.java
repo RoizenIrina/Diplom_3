@@ -91,5 +91,14 @@ public class MainPageBurger {
              }
          }
 
+    @Step("Find ")
+    public boolean checkOrderButtonDisplayed() {
+           try {
+            return driver.findElement(orderButton).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     }
 

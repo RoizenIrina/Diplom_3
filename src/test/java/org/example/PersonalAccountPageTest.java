@@ -5,7 +5,8 @@ import objpages.AuthorizationPage;
 import objpages.MainPageBurger;
 import objpages.PersonalAccountPage;
 import objpages.RegistrationPage;
-import org.Generator;
+import another.Generator;
+import another.YandexOptions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,25 +16,24 @@ import java.time.Duration;
 import static org.junit.Assert.assertEquals;
 
 public class PersonalAccountPageTest {
-    WebDriver driver = new ChromeDriver();
+
+    //WebDriver driver = new ChromeDriver();//когда нужно в Хроме тестировать
+    WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// когда нужно в Яндексе тестировать
 
     @Before
     public void setUp(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
-        objRegistrationPage.open();
-        objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), Generator.getPassword());
-        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
-//        objAuthorizationPage.open();
-        objAuthorizationPage.authorization(Generator.getEmail(), Generator.getPassword());
-    }
+        }
 
     @Test
     @DisplayName("check enter in Personal Account")
     public void checkPersonalAccountLinkTest() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        objRegistrationPage.open();
+        objRegistrationPage.createNewUser(Generator.getLogin(), "4" + Generator.getEmail(), Generator.getPassword());
+        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
+        objAuthorizationPage.authorization("4" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        objMainPageBurger.open();//оставляю повторный опен тк вдруг авторизация не будет возвращать на страницу ссылки
         objMainPageBurger.findAndClickPersonalAccountElement();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
         assertEquals("PersonalAccountEnterLinkFaild", "Выход", objPersonalAccountPage.checkLogInPersonalAccount());
@@ -42,33 +42,45 @@ public class PersonalAccountPageTest {
     @Test
     @DisplayName("check exit from Account by Link at Personal Account")
     public void checkExitButtonTest() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
-        objPersonalAccountPage.open();
-        objPersonalAccountPage.clickExitButton();
+        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        objRegistrationPage.open();
+        objRegistrationPage.createNewUser(Generator.getLogin(), "5" + Generator.getEmail(), Generator.getPassword());
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
+        objAuthorizationPage.authorization("5" + Generator.getEmail(), Generator.getPassword());
+        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
+        objMainPageBurger.findAndClickPersonalAccountElement();
+        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
+        objPersonalAccountPage.clickExitButton();
         assertEquals("ExitFaild", "Войти", objAuthorizationPage.checkLoginButton());
     }
 
     @Test
     @DisplayName("check exit to MainPage by Logo at Personal Account")
     public void checkLogoButtonTest() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
-        objPersonalAccountPage.open();
-        objPersonalAccountPage.clickLogoButton();
+        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        objRegistrationPage.open();
+        objRegistrationPage.createNewUser(Generator.getLogin(), "6" + Generator.getEmail(), Generator.getPassword());
+        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
+        objAuthorizationPage.authorization("6" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
+        objMainPageBurger.findAndClickPersonalAccountElement();
+        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
+        objPersonalAccountPage.clickLogoButton();
         assertEquals("LogoButtonFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
     @DisplayName("check exit to MainPage by Constructor Button at Personal Account")
     public void checkConstructorButtonTest() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
-        objPersonalAccountPage.open();
-        objPersonalAccountPage.clickConstructorButton();
+        RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        objRegistrationPage.open();
+        objRegistrationPage.createNewUser(Generator.getLogin(), "7" + Generator.getEmail(), Generator.getPassword());
+        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
+        objAuthorizationPage.authorization("7" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
+        objMainPageBurger.findAndClickPersonalAccountElement();
+        PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
+        objPersonalAccountPage.clickConstructorButton();
         assertEquals("ConstructorButtonFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 

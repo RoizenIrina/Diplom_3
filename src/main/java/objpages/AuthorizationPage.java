@@ -28,9 +28,12 @@ public class AuthorizationPage {
 
     @Step("Filling out and check the authorization form")
     public void authorization (String email, String password){
+        try{
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ie){
+        }
         driver.findElement(userEmailAuthorization).clear();
-//        driver.findElement(userEmailAuthorization).click();
-        System.out.println(driver.findElement(userEmailAuthorization));
         driver.findElement(userEmailAuthorization).sendKeys(email);
         driver.findElement(userPasswordAuthorization).clear();
         driver.findElement(userPasswordAuthorization).sendKeys(password);
