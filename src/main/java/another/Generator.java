@@ -24,5 +24,4 @@ public class Generator {
         return password;
     }
 
-
 }
