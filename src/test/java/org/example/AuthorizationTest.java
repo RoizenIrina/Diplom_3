@@ -32,11 +32,9 @@ WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// ког�
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.open();
         objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), Generator.getPassword());
-        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        objMainPageBurger.open();
-        objMainPageBurger.findCheckAndClickAuthorizationButton();
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization(Generator.getEmail(), Generator.getPassword());
+        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
         assertEquals("AuthorizationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 

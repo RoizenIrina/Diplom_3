@@ -41,6 +41,11 @@ public class RegistrationPage {
         driver.findElement(userPasswordRegistration).sendKeys(password);
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(registrationButton));
         driver.findElement(registrationButton).click();
+        try{
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ie){
+        }
     }
 
     //	вход через кнопку в форме регистрации

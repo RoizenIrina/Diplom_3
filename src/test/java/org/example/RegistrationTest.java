@@ -1,6 +1,7 @@
 package org.example;
 
 import another.YandexOptions;
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import objpages.AuthorizationPage;
 import objpages.MainPageBurger;
@@ -24,13 +25,13 @@ public class RegistrationTest {
 
     @Test
     @DisplayName("check Registration - creating user")
+    @Description("registration with valid password - 6 symbols")
     public void checkRegistrationTest() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
-        objAuthorizationPage.open();
-        objAuthorizationPage.clickRegistrationLink();
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
+        objRegistrationPage.open();
         objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), Generator.getPassword());
+        AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization(Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
         assertEquals("RegistrationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
@@ -38,6 +39,7 @@ public class RegistrationTest {
 
     @Test
     @DisplayName("check Registration - check Error Massage")
+    @Description("registration with invalid password - 5 symbols")
     public void checkErrorMassageTest() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
