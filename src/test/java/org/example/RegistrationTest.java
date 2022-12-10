@@ -30,11 +30,11 @@ public class RegistrationTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.open();
-        objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), Generator.getPassword());
+        objRegistrationPage.createNewUser(Generator.getLogin(), "9" + Generator.getEmail(), Generator.getPassword());
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
-        objAuthorizationPage.authorization(Generator.getEmail(), Generator.getPassword());
+        objAuthorizationPage.authorization("9" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        assertEquals("RegistrationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("RegistrationFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class RegistrationTest {
         objRegistrationPage.open();
         objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), "12345");
         objRegistrationPage.findErrorMessage();
-        assertEquals("RegistrationFaild", "Некорректный пароль", objRegistrationPage.checkErrorMessage());
+        assertEquals("Error Massage Failed", "Некорректный пароль", objRegistrationPage.checkErrorMessage());
     }
 
     @After

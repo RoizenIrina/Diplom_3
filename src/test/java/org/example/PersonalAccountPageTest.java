@@ -36,7 +36,7 @@ public class PersonalAccountPageTest {
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
         objMainPageBurger.findAndClickPersonalAccountElement();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
-        assertEquals("PersonalAccountEnterLinkFaild", "Выход", objPersonalAccountPage.checkLogInPersonalAccount());
+        assertEquals("PersonalAccountEnterLinkFailed", "Выход", objPersonalAccountPage.checkLogInPersonalAccount());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class PersonalAccountPageTest {
         objMainPageBurger.findAndClickPersonalAccountElement();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
         objPersonalAccountPage.clickExitButton();
-        assertEquals("ExitFaild", "Войти", objAuthorizationPage.checkLoginButton());
+        assertEquals("ExitFailed", "Войти", objAuthorizationPage.checkLoginButton());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PersonalAccountPageTest {
         objMainPageBurger.findAndClickPersonalAccountElement();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
         objPersonalAccountPage.clickLogoButton();
-        assertEquals("LogoButtonFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("LogoButtonFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PersonalAccountPageTest {
         objMainPageBurger.findAndClickPersonalAccountElement();
         PersonalAccountPage objPersonalAccountPage = new PersonalAccountPage(driver);
         objPersonalAccountPage.clickConstructorButton();
-        assertEquals("ConstructorButtonFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("ConstructorButtonFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
         @After       // Закрыть браузер

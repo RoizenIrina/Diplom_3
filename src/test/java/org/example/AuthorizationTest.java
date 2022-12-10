@@ -12,19 +12,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
 
 public class AuthorizationTest {
 
-//WebDriver driver = new ChromeDriver();//когда нужно в Хроме тестировать
-WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// когда нужно в Яндексе тестировать
+    //WebDriver driver = new ChromeDriver();//когда нужно в Хроме тестировать
+    WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// когда нужно в Яндексе тестировать
 
     @Before
-    public void setUp(){
+    public void setUp() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-          }
+    }
 
     @Test
     @DisplayName("check Authorization path by Authorization Button at MainPage")
@@ -32,10 +33,12 @@ WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// ког�
         RegistrationPage objRegistrationPage = new RegistrationPage(driver);
         objRegistrationPage.open();
         objRegistrationPage.createNewUser(Generator.getLogin(), Generator.getEmail(), Generator.getPassword());
+        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
+        objMainPageBurger.open();
+        objMainPageBurger.findCheckAndClickAuthorizationButton();
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization(Generator.getEmail(), Generator.getPassword());
-        MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        assertEquals("AuthorizationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("AuthorizationFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
@@ -49,7 +52,7 @@ WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// ког�
         objMainPageBurger.findAndClickPersonalAccountElement();
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization("1" + Generator.getEmail(), Generator.getPassword());
-        assertEquals("AuthorizationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("AuthorizationFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
@@ -63,7 +66,7 @@ WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// ког�
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization("2" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        assertEquals("AuthorizationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("AuthorizationFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @Test
@@ -78,7 +81,7 @@ WebDriver driver = new ChromeDriver(YandexOptions.getYandexOptions());// ког�
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.authorization("3" + Generator.getEmail(), Generator.getPassword());
         MainPageBurger objMainPageBurger = new MainPageBurger(driver);
-        assertEquals("AuthorizationFaild", "Оформить заказ", objMainPageBurger.findOrderButton());
+        assertEquals("AuthorizationFailed", "Оформить заказ", objMainPageBurger.findOrderButton());
     }
 
     @After
